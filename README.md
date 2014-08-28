@@ -10,7 +10,7 @@ This slider based on [jssor-slider](https://github.com/jssor/jquery-slider) and 
 #Installation
 1. git clone https://github.com/dx0x58/Slider-with-admin-panel
 2. cd Slider-with-admin-panel
-3. Show sql folder, create the tables in your database with these files
+3. See sql folder, create the tables in your database with these files
 4. Add your db cred. into action.php file 
 5. Add read-write priv for 'slider/files' folder
 
