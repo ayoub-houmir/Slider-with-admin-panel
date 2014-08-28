@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Admin Panel</title>
+ 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script src='./slider/assets/js/jssor-slider/js/jssor.slider.mini.js'></script>
+	<script src='./slider/assets/js/tinymce/tinymce.min.js'></script>
+	<script src='./slider/assets/js/handlebars/handlebars-v1.3.0.js'></script>
+	<link rel="stylesheet" href="./slider/assets/js/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./slider/assets/css/slider_style.css">
+</head>
+<body>
+	<div class="container cont-wrap">
+	<!-- Slider Panel start -->
+		<div class="row">
+			<div class="col-md-8">
+				<form role="form" id="file-form" class="form-inline" action="/slider/action.php" method="POST">
+					<div class="form-group">
+						<input type="file" id="file-select" name="photos[]" value="Browse" multiple/>
+						<input type="hidden" name="upload" value="1"/>
+					</div>
+					 	<button type="submit" id="upload-button" class="btn btn-success">Upload</button>
+				</form>					
+			</div>
+			<div class="col-md-1 col-md-offset-1">
+				<label class="admin-label  control-label">Hide?:</label>
+				<input type="checkbox" class="slider-hide" value="1"/>
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<button id='add_slide' class='btn btn-primary'>Add</button>
+				<button id='del_slide' class='btn btn-danger'>Delete</button>			
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div id="slides">	
+				</div>		
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<button id="save_slider" class="btn btn-success">Save</button>
+			</div>
+		</div>
+	<!-- Slider Panel end -->
+	</div>
+	<script src='./slider/assets/js/slider_admin.js'></script>
+	<script src='./slider/assets/js/bootstrap/dist/js/bootstrap.min.js'></script>	
+</body>
+</html>
