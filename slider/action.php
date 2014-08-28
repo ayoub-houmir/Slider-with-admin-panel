@@ -6,20 +6,6 @@ if ($mysqli->connect_errno) {
 }
 
 
-if (!function_exists('json_decode')) {
-    function json_decode($content, $assoc=false) {
-        require_once 'classes/JSON.php';
-        if ($assoc) {
-            $json = new Services_JSON(SERVICES_JSON_LOOSE_TYPE);
-        }
-        else {
-            $json = new Services_JSON;
-        }
-        return $json->decode($content);
-    }
-}
-
-
 function response($stmt, array $a_params, $types, array $errors_msg){
      $bind_names[] = $types;
      for ($i=0; $i<count($a_params);$i++) 
