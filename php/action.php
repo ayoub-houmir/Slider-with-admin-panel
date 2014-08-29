@@ -5,6 +5,7 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
+define('FILE_DIR', '../files/');
 
 function response($stmt, array $a_params, $types, array $errors_msg){
      $bind_names[] = $types;
@@ -33,7 +34,8 @@ function response($stmt, array $a_params, $types, array $errors_msg){
 if (isset($_GET['act'])) {
     switch ($_GET['act']) {
         case 'get_files_list':
-            if ($handle = opendir('files')) {
+            $filedir = FILE_DIR ;
+            if ($handle = opendir($filedir)) {
                 $resp = array();
                 while (false !== ($entry = readdir($handle))) {
                     if($entry != "." && $entry != "..") $resp[] = $entry;
@@ -67,10 +69,11 @@ if (isset($_GET['act'])) {
     }
 }
 if (isset($_POST['file_upload'])) {
-    $uploaddir = 'files/';
+    $uploaddir = FILE_DIR;
     foreach ($_FILES['photos']['name'] as $key => $value) {
         $name = $value;
         $tmp_name = $_FILES['photos']['tmp_name'][$key];
+        var_dump($uploaddir.$name);
         move_uploaded_file($tmp_name,$uploaddir.$name);
     }
 }

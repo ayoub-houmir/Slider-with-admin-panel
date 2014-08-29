@@ -94,7 +94,7 @@
                         }
                     }
                     data.save = 1;
-                    $.post('./slider/action.php', data, function (data) {
+                    $.post('./php/action.php', data, function (data) {
                         var obj = $.parseJSON(data);
                         if ( !! obj.result) {
                             alert('Saved!');
@@ -107,7 +107,7 @@
 
             $('.slider-hide').change(function () {
                 if ($(this).is(':checked')) {
-                    $.post('./slider/action.php', data = {
+                    $.post('./php/action.php', data = {
                         'hide': 'hide'
                     }, function (data) {
                         var obj = $.parseJSON(data);
@@ -118,7 +118,7 @@
                         }
                     });
                 } else {
-                    $.post('./slider/action.php', data = {
+                    $.post('./php/action.php', data = {
                         'hide': 'nonehide'
                     }, function (data) {
                         var obj = $.parseJSON(data);
@@ -135,7 +135,7 @@
         },
             '_build_options': function () {
             $.ajax({
-                url: './slider/action.php?act=get_files_list',
+                url: './php/action.php?act=get_files_list',
                 complete: function (data) {
                     var obj = $.parseJSON(data.response);
                     for (var i in obj) {
@@ -148,7 +148,7 @@
         },
             '_get_slides': function () {
             $.ajax({
-                url: './slider/action.php?act=get_slides_data',
+                url: './php/action.php?act=get_slides_data',
                 complete: function (data) {
                     var obj = $.parseJSON(data.response);
 
@@ -224,7 +224,7 @@
                 }
                 var xhr = new XMLHttpRequest();
                 // Open the connection.
-                xhr.open('POST', './slider/action.php', true);
+                xhr.open('POST', './php/action.php', true);
                 // Set up a handler for when the request finishes.
                 xhr.onload = function () {
                     if (xhr.status === 200) {
@@ -249,7 +249,7 @@
     };
     slider_.exec();
     $.ajax({
-        url: './slider/action.php?act=hide_or_show',
+        url: './php/action.php?act=hide_or_show',
         async: false,
         complete: function (data) {
             var obj = $.parseJSON(data.response);

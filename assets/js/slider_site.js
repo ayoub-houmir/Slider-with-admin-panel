@@ -7,7 +7,7 @@
         },
             '_load': function (callback) {
             $.ajax({
-                url: './slider/action.php?act=hide_or_show',
+                url: './php/action.php?act=hide_or_show',
                 async: false,
                 complete: function (data) {
                     var obj = $.parseJSON(data.response);
@@ -42,7 +42,7 @@
         /*Options end*/
 
         $.ajax({
-            url: './slider/action.php?act=get_slides_data',
+            url: './php/action.php?act=get_slides_data',
             async: false,
             complete: function (data) {
                 var obj = $.parseJSON(data.response);
@@ -51,19 +51,19 @@
                     // yes comments yes links  
                     if (val.comment !== '' && val.link !== '') {
                         /*jshint multistr: true */
-                        html += "<div><a href='" + val.link + "'><img u='image' src='./slider/files/" + val.img + "'/></a> \
+                        html += "<div><a href='" + val.link + "'><img u='image' src='./files/" + val.img + "'/></a> \
                                 <div  class='slider-content'>" + val.comment + "</div></div>";
                         // yes comments no links             
                     } else if (val.comment !== '' && val.link === '') {
                         /*jshint multistr: true */
-                        html += "<div><img u='image' src='./slider/files/" + val.img + "'/> \
+                        html += "<div><img u='image' src='./files/" + val.img + "'/> \
                                 <div  class='slider-content'>" + val.comment + "</div></div>";
                         // no comments yes links           
                     } else if (val.comment === '' && val.link !== '') {
-                        html += "<div><a href='" + val.link + "'><img u='image' src='./slider/files/" + val.img + "'/></a></div>";
+                        html += "<div><a href='" + val.link + "'><img u='image' src='./files/" + val.img + "'/></a></div>";
                         // no comments no links           
                     } else {
-                        html += "<div><img u='image' src='./slider/files/" + val.img + "' /></div>";
+                        html += "<div><img u='image' src='./files/" + val.img + "' /></div>";
                     }
                 });
 
