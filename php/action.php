@@ -78,8 +78,12 @@ if (isset($_POST['file_upload'])) {
     foreach ($_FILES['photos']['name'] as $key => $value) {
         $name = $value;
         $tmp_name = $_FILES['photos']['tmp_name'][$key];
-        var_dump($uploaddir.$name);
-        move_uploaded_file($tmp_name,$uploaddir.$name);
+        $path = $uploaddir.$name;
+        if(is_writable($uploaddir)){
+            move_uploaded_file($tmp_name,$path);
+        } else{
+            echo json_encode(array('result'=>'false','error'=>'File folder permission denied!'));
+        }
     }
 }
 if(isset($_POST['save'])){

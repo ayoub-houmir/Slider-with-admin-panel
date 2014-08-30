@@ -239,7 +239,7 @@
                 // Open the connection.
                 xhr.open('POST', './php/action.php', true);
                 // Set up a handler for when the request finishes.
-                xhr.onload = function () {
+                xhr.onload = function (data) {
                     if (xhr.status === 200) {
                         // File(s) uploaded.
                         uploadButton.innerHTML = 'Upload';
@@ -247,6 +247,10 @@
                         tinyMCE.editors = tinymce.editors = [];
                         this.files = '';
                         this._build_options();
+			var obj = $.parseJSON(data.target.response);
+                        if (obj && obj.error) {
+                            alert(obj.error);
+                        }
                     } else {
                         alert('Error!');
                     }
