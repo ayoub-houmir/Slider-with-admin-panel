@@ -25,22 +25,6 @@
     var show = slider_sett.show;
     console.log(show);
     if(show){
-        /*Slider options. See refference http://www.jssor.com/development/reference-options.html*/
-        var options = {
-            $AutoPlay: true,
-            $SlideWidth: 1024,
-            $SlideHeight: 400,
-            $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$,
-                $ChanceToShow: 2
-            },
-            $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$,
-                $ChanceToShow: 2
-            }
-        };
-        /*Options end*/
-
         $.ajax({
             url: './php/action.php?act=get_slides_data',
             async: false,
@@ -48,43 +32,62 @@
                 var obj = $.parseJSON(data.response);
                 var html = '';
                 $.each(obj, function (index, val) {
-                    // yes comments yes links  
+                    // yes comments yes links
                     if (val.comment !== '' && val.link !== '') {
                         /*jshint multistr: true */
                         html += "<div><a href='" + val.link + "'><img u='image' src='./files/" + val.img + "'/></a> \
                                 <div  class='slider-content'>" + val.comment + "</div></div>";
-                        // yes comments no links             
+                        // yes comments no links
                     } else if (val.comment !== '' && val.link === '') {
                         /*jshint multistr: true */
                         html += "<div><img u='image' src='./files/" + val.img + "'/> \
                                 <div  class='slider-content'>" + val.comment + "</div></div>";
-                        // no comments yes links           
+                        // no comments yes links
                     } else if (val.comment === '' && val.link !== '') {
                         html += "<div><a href='" + val.link + "'><img u='image' src='./files/" + val.img + "'/></a></div>";
-                        // no comments no links           
+                        // no comments no links
                     } else {
                         html += "<div><img u='image' src='./files/" + val.img + "' /></div>";
                     }
                 });
 
                 $('.slide-box').append(html);
-                var jssor_slider1 = new $JssorSlider$('slider1_container', options);
-
-                //responsive code begin
-                function ScaleSlider() {
-                    var parentWidth = $('#slider1_container').parent().width();
-                    if (parentWidth) {
-                        jssor_slider1.$SetScaleWidth(parentWidth);
-                    } else window.setTimeout(ScaleSlider, 30);
-                }
-                //Scale slider after document ready
-                ScaleSlider();
-                if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-                    //Capture window resize event
-                    $(window).bind('resize', ScaleSlider);
-                }
-                //responsive code end           
             }
-        });    
+        });
     }
 })();
+
+jQuery(document).ready(function($) {
+    /*Slider options. See refference http://www.jssor.com/development/reference-options.html*/
+    var options = {
+        $AutoPlay: true,
+        $SlideWidth: 1024,
+        $SlideHeight: 400,
+        $ArrowNavigatorOptions: {
+            $Class: $JssorArrowNavigator$,
+            $ChanceToShow: 2
+        },
+        $BulletNavigatorOptions: {
+            $Class: $JssorBulletNavigator$,
+            $ChanceToShow: 2
+        }
+    };
+    /*Options end*/
+
+    var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+
+    //responsive code begin
+    function ScaleSlider() {
+        var parentWidth = $('#slider1_container').parent().width();
+        if (parentWidth) {
+            jssor_slider1.$SetScaleWidth(parentWidth);
+        } else window.setTimeout(ScaleSlider, 30);
+    }
+    //Scale slider after document ready
+    ScaleSlider();
+    if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+        //Capture window resize event
+        $(window).bind('resize', ScaleSlider);
+    }
+    //responsive code end
+});

@@ -68,12 +68,25 @@
 
                 if (tinyMCE.editors.length > 0) {
                     var num = 1;
+                    var img;
+                    var link;
+                    var index;
                     for (inst in tinyMCE.editors) {
                         if (isNumeric(inst)) {
-                            var index = inst;
 
-                            var img = $('.slide-img option:selected')[index].value;
-                            var link = $('.slide-img option:selected').eq(index).closest('.controls').find('.link').val().trim();
+                            index = inst;
+
+                            if (typeof $('.slide-img option:selected')[index] != 'undefined'){
+                                img = $('.slide-img option:selected')[index].value;
+                            } else {
+                                img='';
+                            }
+                            
+                            if (typeof $('.slide-img option:selected').eq(index).closest('.controls').find('.link').val() != 'undefined') {
+                                link = $('.slide-img option:selected').eq(index).closest('.controls').find('.link').val().trim();
+                            } else{
+                                link = '';
+                            }
                             //normalize url
                             if (link) {
                                 if (link.match('http')) {
@@ -89,7 +102,7 @@
                                 img: img,
                                 link: link
                             };
-                            //
+                            
                             num++;
                         }
                     }
